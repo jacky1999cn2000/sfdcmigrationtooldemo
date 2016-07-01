@@ -1,0 +1,49 @@
+     [echo] Deploying Begins...
+     [echo] sf.username liang.zhao83.sfdc01@gmail.com
+     [echo] sf.password Test.1234hsrVZFqR3LRHJH8BtLC62fEp1
+     [echo] sf.sessionId 
+
+BUILD FAILED
+
+/Users/jacky.zhao/Documents/salesforce_ant_37.0/advancedapexprogramming/build.xml:34: Invalid username, password, security token; or user locked out.
+	at com.salesforce.ant.SFDCAntTask.doLogin(SFDCAntTask.java:233)
+	at com.salesforce.ant.SFDCAntTask.getMetadataConnection(SFDCAntTask.java:266)
+	at com.salesforce.ant.SFDCMDAPIAntTaskRunner.runTask(SFDCMDAPIAntTaskRunner.java:20)
+	at com.salesforce.ant.DeployTask.execute(DeployTask.java:76)
+	at org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:293)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)
+	at org.apache.tools.ant.Task.perform(Task.java:348)
+	at org.apache.tools.ant.Target.execute(Target.java:435)
+	at org.apache.tools.ant.Target.performTasks(Target.java:456)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1405)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1376)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
+	at org.apache.tools.ant.Main.runBuild(Main.java:853)
+	at org.apache.tools.ant.Main.startAnt(Main.java:235)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:285)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:112)
+Caused by: [LoginFault [ApiFault  exceptionCode='INVALID_LOGIN'
+ exceptionMessage='Invalid username, password, security token; or user locked out.'
+ extendedErrorDetails='{[0]}'
+]
+]
+
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at java.lang.Class.newInstance(Class.java:442)
+	at com.sforce.ws.bind.TypeMapper.readSingle(TypeMapper.java:652)
+	at com.sforce.ws.bind.TypeMapper.readObject(TypeMapper.java:529)
+	at com.sforce.ws.transport.SoapConnection.parseDetail(SoapConnection.java:236)
+	at com.sforce.ws.transport.SoapConnection.createException(SoapConnection.java:210)
+	at com.sforce.ws.transport.SoapConnection.receive(SoapConnection.java:156)
+	at com.sforce.ws.transport.SoapConnection.send(SoapConnection.java:99)
+	at com.sforce.soap.partner.PartnerConnection.login(PartnerConnection.java:792)
+	at com.salesforce.ant.SFDCAntTask.doLogin(SFDCAntTask.java:230)
+	... 20 more

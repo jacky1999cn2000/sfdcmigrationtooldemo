@@ -1,0 +1,34 @@
+     [echo] Deploying Begins...
+     [echo] sf.username liang.zhao83.sfdc01@gmail.com
+     [echo] sf.password Test.1234hsrVZFqR3LRHJH8BtLC62fEp1
+     [echo] sf.sessionId 
+
+BUILD FAILED
+
+/Users/jacky.zhao/Documents/salesforce_ant_37.0/advancedapexprogramming/build.xml:29: Problem: failed to create task or type antlib:com.salesforce:deploy
+Cause: The name is undefined.
+Action: Check the spelling.
+Action: Check that any custom tasks/types have been declared.
+Action: Check that any <presetdef>/<macrodef> declarations have taken place.
+No types or tasks have been defined in this namespace yet
+
+This appears to be an antlib declaration. 
+Action: Check that the implementing library exists in one of:
+        -/usr/local/Cellar/ant/1.9.6/libexec/lib
+        -/Users/jacky.zhao/.ant/lib
+        -a directory added on the command line with the -lib argument
+
+	at org.apache.tools.ant.UnknownElement.getNotFoundException(UnknownElement.java:500)
+	at org.apache.tools.ant.UnknownElement.makeObject(UnknownElement.java:432)
+	at org.apache.tools.ant.UnknownElement.maybeConfigure(UnknownElement.java:164)
+	at org.apache.tools.ant.Task.perform(Task.java:347)
+	at org.apache.tools.ant.Target.execute(Target.java:435)
+	at org.apache.tools.ant.Target.performTasks(Target.java:456)
+	at org.apache.tools.ant.Project.executeSortedTargets(Project.java:1405)
+	at org.apache.tools.ant.Project.executeTarget(Project.java:1376)
+	at org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)
+	at org.apache.tools.ant.Project.executeTargets(Project.java:1260)
+	at org.apache.tools.ant.Main.runBuild(Main.java:853)
+	at org.apache.tools.ant.Main.startAnt(Main.java:235)
+	at org.apache.tools.ant.launch.Launcher.run(Launcher.java:285)
+	at org.apache.tools.ant.launch.Launcher.main(Launcher.java:112)

@@ -1,0 +1,12 @@
+     [echo] Deploying Begins...
+     [echo] sf.username liang.zhao.sfdc01@gmail.com
+     [echo] sf.password Test.1234hsrVZFqR3LRHJH8BtLC62fEp1
+     [echo] sf.sessionId 
+[sf:deploy] Request for a deploy submitted successfully.
+[sf:deploy] Request ID for the current deploy task: 0Af3600000yskQbCAI
+[sf:deploy] Waiting for server to finish processing the request...
+[sf:deploy] Request Status: InProgress
+[sf:deploy] Request Status: Succeeded
+[sf:deploy] *********** DEPLOYMENT SUCCEEDED ***********
+[sf:deploy] Finished request 0Af3600000yskQbCAI successfully.
+     [echo] Deploying Ends...
