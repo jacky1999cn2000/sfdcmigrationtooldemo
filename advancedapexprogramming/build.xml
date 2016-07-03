@@ -2,6 +2,7 @@
 
     <property file="build.properties"/>
     <property name="source" value="src" />
+    <property name="delete" value="delete" />
     <tstamp><format property="TSTAMP" pattern="hhmmss" /></tstamp>
     <property name="logName" value="log/${DSTAMP}${TSTAMP}" />
     <condition property="sf.username" value=""> <not> <isset property="sf.username"/> </not> </condition>
@@ -33,6 +34,28 @@
         deployRoot="${source}"
         rollbackOnError="true" />
       <echo>Deploying Ends...</echo>
+      <record name="${logName}" action="stop" />
+    </target>
+
+    <target name="delete">
+      <mkdir dir="log" />
+      <record name="${logName}" action="start" />
+      <echo>Deleting Begins...</echo>
+      <echo message="sf.username ${sf.username}"/>
+      <echo message="sf.password ${sf.password}"/>
+      <echo message="sf.sessionId ${sf.sessionId}"/>
+      <sf:deploy
+        username="${sf.username}"
+        password="${sf.password}"
+        sessionId="${sf.sessionId}"
+        serverurl="${sf.serverurl}"
+        maxPoll="${sf.maxPoll}"
+        pollWaitMillis="${sf.pollWaitMillis}"
+        runAllTests="true"
+        checkOnly="false"
+        deployRoot="${delete}"
+        rollbackOnError="true" />
+      <echo>Deleting Ends...</echo>
       <record name="${logName}" action="stop" />
     </target>
 
