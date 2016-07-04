@@ -45,3 +45,28 @@ secondAttemptSync()是真正做具体处理的方法:
 
 * [ClassCode](src/industrialrobustfuturecall/ClassCode.cls)
 * [TriggerCode](src/industrialrobustfuturecall/TriggerCode.trigger)
+
+### Batch
+
+上面的两个方法都遇到两个问题:
+  * 每次能处理的solutions数量有限
+  * 没有办法chain processing(to continue processing any remaining callouts after exceeding current limits)
+
+batch能很好地解决这两个问题:
+  * batch能处理百万级别的数据 - query甚至都不用加LastModifiedDate这个index field来filter数据(因为batch的handle能力,你可以用dataloader大批量的更改solutions);
+  * batch本来不需要chain,因为batch可以处理所有需要被处理的数据;但是如果有些数据是在batch做完query之后被更改的呢?不过没关系,因为我们可以在batch的finish()方法中来start一个新的batch.
+    * startBatch()方法用来启动batch(第一次或者chain的时候),该方法有以下好处:
+      * 在第一次启动的时候用一个static variable `batchRequested`来判断是否已经在该execution context中启动过了batch,同时还用了一个util方法isBatchActive()来看是否当前的batch class正在运行;
+      * forceStart flag可以bypass这个check,从而允许batch job在自己的finish()里restart another batch job(当前的batch job is technically running during the finish method)
+      * 这个方法里还自动计算了scope(每个batch handle数据的数量) - 为callouts limit;因为每个batch execute statement都存在于它自己的execution context里面,所以不必担心别的代码会making callouts.
+      * 将`Database.executeBatch()`放在了`try{}catch{}`里,如果出现异常(比如系统中已经存在了5个batch jobs而又没有enable Apex flex queue feature)则退出 - 即便退出也没有问题,因为所有需要处理的solutions都标记了TranslationPending__c为true,所以下次batch启动时会被处理.
+    * 如果有些record因为某些error无法被translate,则会造成一个永无停止的batch jobs,下面是一些解决建议(更好的方法参见centralized async pattern):
+      * Clear the TranslationPending__c flag for records that can’t be translated due to an unrecoverable error.
+      * Use another field to mark the record as an error.
+      * Keep track of the start time of the original batch, and add a DateTime filter to the query to ignore any records that were last modified before the batch was run.
+
+batch 最大的问题的效率太低,等待时间不定且太长
+
+* [ClassCode](src/batch/ClassCode.cls)
+* [BatchClass](src/batch/BatchClass.cls)
+* [TriggerCode](src/batch/TriggerCode.trigger)
