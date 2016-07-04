@@ -11,22 +11,22 @@ public with sharing class SolutionTriggerHandler {
 		List<String> textChangedIds = new List<ID>();
 		for(Solution sl: solutionList){
 			if(isInsert || sl.SolutionNote!= oldMap.get(sl.id).SolutionNote)
-				textChangedIds.add(sl.id);
+			textChangedIds.add(sl.id);
 
 			if(textChangedIds.size()>=100){
 				newAsyncRequests.add(
-					new AsyncRequest__c(AsyncType__c = 'Translate Solution',
-															Params__c = string.Join(textChangedIds,','))
+				new AsyncRequest__c(AsyncType__c = 'Translate Solution',
+				Params__c = string.Join(textChangedIds,','))
 				);
 				textChangedIds.clear();
 			}
 		}
 
 		if(textChangedIds.size()>0)
-			newAsyncRequests.add(
-				new AsyncRequest__c(AsyncType__c = 'Translate Solution',
-														Params__c = string.Join(textChangedIds,','))
-			);
+		newAsyncRequests.add(
+		new AsyncRequest__c(AsyncType__c = 'Translate Solution',
+		Params__c = string.Join(textChangedIds,','))
+		);
 
 		insert newAsyncRequests;
 	}
