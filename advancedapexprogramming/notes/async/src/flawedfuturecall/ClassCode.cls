@@ -1,7 +1,7 @@
-public class Solution1 {
+public class ClassCode {
   private static Boolean alreadyProcessed = false;
 
-  public static void handleTrigger1( List < Solution > solutionList, Map < ID, Solution > newMap, Map < ID, Solution > oldMap, Boolean isInsert) {
+  public static void handleTrigger( List < Solution > solutionList, Map < ID, Solution > newMap, Map < ID, Solution > oldMap, Boolean isInsert) {
     if( alreadyProcessed) return;
     alreadyProcessed = true;
     if( isInsert)
