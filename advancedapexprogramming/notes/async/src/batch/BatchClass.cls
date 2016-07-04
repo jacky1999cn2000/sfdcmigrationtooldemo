@@ -21,8 +21,8 @@ global class BatchClass implements Database.Batchable<SObject>, Database.AllowCa
   private static Boolean batchRequested = false;
 
 	public static void startBatch(Boolean forceStart){
-		if(!forceStart &&
-			(batchRequested || isBatchActive('BatchClass'))) return;
+		if(!forceStart && (batchRequested || isBatchActive('BatchClass')))
+      return;
 
 		BatchClass ga = new BatchClass();
 		Integer batchSize = Limits.getLimitCallouts();

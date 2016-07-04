@@ -65,8 +65,26 @@ batch能很好地解决这两个问题:
       * Use another field to mark the record as an error.
       * Keep track of the start time of the original batch, and add a DateTime filter to the query to ignore any records that were last modified before the batch was run.
 
-batch 最大的问题的效率太低,等待时间不定且太长
+batch 最大的问题的效率太低,等待时间不定且太长 - future call要快许多
 
 * [ClassCode](src/batch/ClassCode.cls)
 * [BatchClass](src/batch/BatchClass.cls)
 * [TriggerCode](src/batch/TriggerCode.trigger)
+
+### Queueable Apex
+
+**CAUTION!**
+
+The following section includes design patterns for asynchronous operations with queueable Apex and chaining. Used incorrectly, it is possible to create code that will spawn large numbers of execution threads very rapidly. Because it is impossible to update a class that has a queueable Apex job queued or executing, and it is possible to queue jobs faster than they can be aborted (even using anonymous Apex), you can place an org in a state where you cannot abort your code execution. Your code can run forever (or until aborted due to the 24 hour limit on asynchronous calls).
+
+Queueable Apex code should always be gated by an on/off switch settable via a custom setting or other means that does not require a metadata change. Trust me on this – you really don’t want to find yourself in this situation.
+
+Queueable结合了future & batch的优点,基本上思路和batch一样,但由于Queueable的一些特点,有以下注意事项:
+
+  * If we were performing any asynchronous operation other than a callout, it would be possible to chain the async operation into a new instance of the QueueableClass class, or the current class instance using system.enqueueJob(this). However, there is currently a limitation to queueable Apex that prevents you from chaining if you have performed a callout. This, along with limits on the number of classes you can chain (which varies by type of org), and the possibility that other classes in the execution context may have queued a job, is why we not only check the limits to see if chaining is possible, but enclose the System.enqueueJob method inside of an exception handler.
+  * What do you do if chaining is not allowed? How can you ensure that your work will complete? This problem will be addressed in Centralized Asynchronous Processing.
+
+
+* [ClassCode](src/queueable/ClassCode.cls)
+* [QueueableClass](src/queueable/QueueableClass.cls)
+* [TriggerCode](src/queueable/TriggerCode.trigger)
