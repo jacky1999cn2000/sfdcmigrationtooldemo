@@ -1,4 +1,4 @@
-# Fun With Collections
+# Chapter 5 Fun With Collections
 
 * Using list to create map, and using map to obtain set
 ```javascript
@@ -9,7 +9,7 @@
 
 * Do not use object as key since modifying object will change the hashed value and therefore same object will become a different key
 
-* Keep track of objects to update in a map - in this way, you can update objects in different places and update them once (do not use list since you can put same objects more than once in a list, and do not use a set because modifying a object will result a new hash and result in adding same objects in set more than once). 
+* Keep track of objects to update in a map - in this way, you can update objects in different places and update them once (do not use list since you can put same objects more than once in a list, and do not use a set because modifying a object will result a new hash and result in adding same objects in set more than once).
 ```javascript
 Map < ID, Contact > contactsToUpdate = new Map < ID, Contact >();
 

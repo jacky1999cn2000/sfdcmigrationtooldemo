@@ -1,4 +1,4 @@
-# DML Cascading Trigger Pattern
+# Chapter 6 DML Cascading Trigger Pattern
 
 Nitro中定义的trigger不会做DML操作,所以不会有 trigger1 -> trigger2 -> trigger3 这样的情况出现,那么如果发生这种情况,可以用下面的这个pattern
 

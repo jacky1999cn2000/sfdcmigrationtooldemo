@@ -1,4 +1,4 @@
-# ThinkingInApexBulkPatterns
+# Chapter 1 - 4 ThinkingInApexBulkPatterns
 
 ### Requirement:
 在Opportunity的trigger当中,确保所有stagename改变了的Opportunity都有至少一个OpportunityContactRole,并且其中一个OpportunityContactRole为Primary;如果该Opportunity没有任何OpportunityContactRole,则确保有一个task被创建,提醒owner来为该Opportunity创建一个Primary OpportunityContactRole.

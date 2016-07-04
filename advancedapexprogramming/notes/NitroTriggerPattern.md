@@ -1,4 +1,4 @@
-# NitroTriggerPattern
+# Chapter 6 (P.S. NitroTriggerPattern)
 
 ### 每个trigger里面都调用NitroTriggerDispatcher.TriggerDispatcher():
 ```javascript
