@@ -82,7 +82,7 @@ Queueable Apex code should always be gated by an on/off switch settable via a cu
 Queueable结合了future & batch的优点,基本上思路和batch一样,但由于Queueable的一些特点,有以下注意事项:
 
   * If we were performing any asynchronous operation other than a callout, it would be possible to chain the async operation into a new instance of the QueueableClass class, or the current class instance using system.enqueueJob(this). However, there is currently a limitation to queueable Apex that prevents you from chaining if you have performed a callout. This, along with limits on the number of classes you can chain (which varies by type of org), and the possibility that other classes in the execution context may have queued a job, is why we not only check the limits to see if chaining is possible, but enclose the System.enqueueJob method inside of an exception handler.
-  * What do you do if chaining is not allowed? How can you ensure that your work will complete? This problem will be addressed in Centralized Asynchronous Processing.
+  * What do you do if chaining is not allowed? How can you ensure that your work will complete? This problem will be addressed in [Centralized Asynchronous Processing](./CentralizedAsyncProcessing).
 
 
 * [ClassCode](src/queueable/ClassCode.cls)
