@@ -108,8 +108,8 @@ At this point it is unlikely that the call will fail, as the code has already te
 
 ### Changes to Scheduled Apex
 
-**The previous edition of this book described design patterns for use with scheduled Apex that are now obsolete and should be avoided.
+The previous edition of this book described design patterns for use with scheduled Apex that are now obsolete and should be avoided.
 
 Those patterns related to the use of scheduled Apex to chain asynchronous calls. Because it is safe to start a scheduled job in a batch or future call, and safe to start a batch process or make a future call from within a scheduled execute method, it is possible to alternate between them to infinitely chain asynchronous operations. You can also restart a scheduled operation – scheduling the new one for a few seconds after the existing one to implement chaining.
 
-With native chaining support built in to queueable Apex, there is no longer a need to use scheduled Apex in this manner. In fact, with the launch of queueable Apex, Salesforce modified the behavior of scheduled Apex to enforce a minimum time between scheduled executions regardless of the scheduled time you specify. The queueable design patterns described earlier in this chapter are more reliable, impose a lighter system load, and are much faster than previous methods based on scheduled Apex.**
+With native chaining support built in to queueable Apex, there is no longer a need to use scheduled Apex in this manner. **In fact, with the launch of queueable Apex, Salesforce modified the behavior of scheduled Apex to enforce a minimum time between scheduled executions regardless of the scheduled time you specify. The queueable design patterns described earlier in this chapter are more reliable, impose a lighter system load, and are much faster than previous methods based on scheduled Apex**.
