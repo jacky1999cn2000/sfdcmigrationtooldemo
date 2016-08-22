@@ -67,11 +67,17 @@ public with sharing class TriggerArchitectureMain {
 *** Op:Insert|Type:Account|Rows:1
 *** activeFunction: OpportunityHandler
 *** OpportunityHandler inProgressEntry Begin
-
 *** AccountHanlder mainEntry Begin
 *** AccountHanlder mainEntry Exit
-
 *** OpportunityHandler inProgressEntry Exit
+
+*** Op:Insert|Type:Account|Rows:1
+*** activeFunction: OpportunityHandler
+*** OpportunityHandler inProgressEntry Begin
+*** AccountHanlder mainEntry Begin
+*** AccountHanlder mainEntry Exit
+*** OpportunityHandler inProgressEntry Exit
+
 *** OpportunityHandler mainEntry Exit
 *** OpportunityHandler2 mainEntry Begin
 *** OpportunityHandler2 mainEntry Exit
@@ -88,9 +94,19 @@ public class OpportunityHandler implements TriggerArchitectureMain.ITriggerEntry
 		System.debug('*** OpportunityHandler mainEntry Begin');
 		Account acct = new Account(Name='Test',BillingCity='San Francisco');
     insert acct;
+
+    /*
+      reset activeFunction to itself after DML, this will ensure that after AccountHanlder finished
+      its work, the activeFunction will be correctly reset to the currently running handler, so any subsequent DML will invoke the correct inProgressEntry() method
+    */
+    TriggerArchitectureMain.activeFunction = this;
 		for(Integer i = 0; i < 10000; i++){
 
 		}
+
+    //so if we insert another account, the OpportunityHandler.inProgressEntry, not AccountHanlder.inProgressEntry, will be invoked.
+    Account acct2 = new Account(Name='Test2',BillingCity='San Francisco');
+    insert acct2;
 		System.debug('*** OpportunityHandler mainEntry Exit');
 	}
 
@@ -124,7 +140,7 @@ public class OpportunityHandler2 implements TriggerArchitectureMain.ITriggerEntr
 	}
 }
 
-///OpportunityHandler2
+///AccountHanlder
 public with sharing class AccountHanlder implements TriggerArchitectureMain.ITriggerEntry {
 	public String getName(){
 		return 'AccountHanlder';
